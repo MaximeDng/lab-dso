@@ -27,5 +27,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci --no-audit
-    - run: npm run build --if-present
+    #- run: npm run build --if-present
+    
     - run: npm test
+
+    #Build Docker image
+    - name: Build Docker image for express js app
+      run: docker build -t dso-lab-img .
