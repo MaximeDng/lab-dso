@@ -33,13 +33,13 @@ jobs:
 
     #Build Docker image
     - name: Build Docker image for express js app
-      run: docker build -t dso-lab-img .
+      run: docker build -t dso-lab-img:latest .
 
     #Trivy Scan vuln
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@0.34.0
       with:
-        image-ref: 'dso-lab-img'
+        image-ref: 'dso-lab-img:latest'
         format: 'sarif'
         output: 'trivy-results.sarif'
         severity: 'CRITICAL,HIGH'
