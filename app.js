@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var AWS_SECRET_KEY = "AKIAIMNO88SA5EXAMPLE";
+var AWS_SECRET_KEY = "AKIAIMNO88SA5EXAMPLE";
 
 var app = express();
 
