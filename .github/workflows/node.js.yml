@@ -35,8 +35,8 @@ jobs:
     - name: Build Docker image for express js app
       run: docker build -t dso-lab-img:latest .
 
-    #Trivy Scan vuln
-    - name: Run Trivy vulnerability scanner
+    #Trivy Scan vuln output table
+    - name: Run Trivy vulnerability scanner Output ForDev
       uses: aquasecurity/trivy-action@0.34.0
       with:
         image-ref: 'dso-lab-img:latest'
@@ -45,3 +45,19 @@ jobs:
         severity: 'CRITICAL,HIGH'
         exit-code: '0'
         ignore-unfixed: true
+        
+    #Trivy Scan vuln output table
+    - name: Run Trivy vulnerability scanner output Sarrif
+      uses: aquasecurity/trivy-action@0.34.0
+      with:
+        image-ref: 'dso-lab-img:latest'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL,HIGH'
+        exit-code: '0'
+        ignore-unfixed: true
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+          sarif_file: 'trivy-results.sarif'
