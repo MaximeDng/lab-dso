@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var DB_PASSWORD = "EANFISNCWW?WLO?CPO?W24552%%$";
+var AWS_SECRET_KEY = "AKIAIMNO88SA5EXAMPLE";
 
 var app = express();
 
