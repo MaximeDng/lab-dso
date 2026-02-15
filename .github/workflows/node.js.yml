@@ -21,14 +21,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with: 
+        fetch-depth: 0
+    
+    #Check secrets
+    - name: Check static secret in code
+      uses: actions:git-leaks@v2
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #Setup node js
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci --no-audit
+
     #- run: npm run build --if-present
-    
+    - run: npm ci --no-audit
     - run: npm test
 
     #Build Docker image
